@@ -28,8 +28,8 @@ router.post("/addBook", async(req, res, next) => {
      // })
       //saveCover(book, req.body.cover)
     try {
-        const {Title, Author, description,publishDate,pageCount,createdAt,NumberOfCopies} = req.body;
-        await bookService.addBook(Title, Author, description,publishDate, pageCount,createdAt,NumberOfCopies);
+        const {Title, Author, description,ISBN,publishDate,pageCount,createdAt,NumberOfCopies} = req.body;
+        await bookService.addBook(Title, Author, description,ISBN,publishDate, pageCount,createdAt,NumberOfCopies);
         res.send({ success: true, msg: "Book Added"});
     } catch (err) {
         res.send({ success: false, msg: "Book not Added!", err})
@@ -37,10 +37,10 @@ router.post("/addBook", async(req, res, next) => {
 });
 
 //Route to delete a book
-router.delete("/deleteBook/:title", async(req, res, next) => {
+router.delete("/deleteBook/:isbn", async(req, res, next) => {
     try {
-        const title = req.params.title;
-        await bookService.deleteBook(title);
+        const isbn = req.params.isbn;
+        await bookService.deleteBook(isbn);
         res.send({ success: true, msg: "Book deleted"})
     } catch (error) {
         res.send({ success: false, msg: "Book not Added!"})

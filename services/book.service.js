@@ -6,12 +6,12 @@ function bookService() {
       return Book.find({})
     }
   
-    async function addBook(Title, Author, description, publishDate, pageCount, createdAt, NumberOfCopies) {
-      return Book.create({Title: Title, Author: Author, description: description, publishDate: publishDate,pageCount: pageCount, createdAt: createdAt, NumberOfCopies: NumberOfCopies})
+    async function addBook(Title, Author, description, ISBN, publishDate, pageCount, createdAt, NumberOfCopies) {
+      return Book.create({Title: Title, Author: Author,ISBN:ISBN, description: description, publishDate: publishDate,pageCount: pageCount, createdAt: createdAt, NumberOfCopies: NumberOfCopies})
     }
   
-    async function deleteBook(title) {
-      return Book.deleteOne({Title: title})
+    async function deleteBook(isbn) {
+      return Book.deleteOne({ISBN: isbn})
     }
     /*async function saveCover(book, coverEncoded) {
       if (coverEncoded == null) return
