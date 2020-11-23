@@ -18,9 +18,18 @@ router.get("/getBooks", async(req, res, next) => {
 
 //Route to create a book
 router.post("/addBook", async(req, res, next) => {
+    //const book = new Book({
+       // Title: req.body.Title,
+        //Author: req.body.Author,
+        //ublishDate: new Date(req.body.publishDate),
+       // createdAt: new Date(req.body.createdAt),
+       // pageCount: req.body.pageCount,
+       // description: req.body.description
+     // })
+      //saveCover(book, req.body.cover)
     try {
-        const {title, author, isbn} = req.body;
-        await bookService.addBook(title, author, isbn);
+        const {Title, Author, description,publishDate,pageCount,createdAt,NumberOfCopies} = req.body;
+        await bookService.addBook(Title, Author, description,publishDate, pageCount,createdAt,NumberOfCopies);
         res.send({ success: true, msg: "Book Added"});
     } catch (err) {
         res.send({ success: false, msg: "Book not Added!", err})
@@ -28,10 +37,10 @@ router.post("/addBook", async(req, res, next) => {
 });
 
 //Route to delete a book
-router.delete("/deleteBook/:isbn", async(req, res, next) => {
+router.delete("/deleteBook/:title", async(req, res, next) => {
     try {
-        const isbn = req.params.isbn;
-        await bookService.deleteBook(isbn);
+        const title = req.params.title;
+        await bookService.deleteBook(title);
         res.send({ success: true, msg: "Book deleted"})
     } catch (error) {
         res.send({ success: false, msg: "Book not Added!"})
