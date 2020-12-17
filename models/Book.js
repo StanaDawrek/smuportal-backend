@@ -52,6 +52,7 @@ const bookSchema = new mongoose.Schema({
     required:true,
     min:1,
   },
+  imagePath: { type: String, required: true },
   //coverImage: {
     //type: Buffer,
     //required: true
