@@ -6,8 +6,8 @@ function bookService() {
       return Book.find({})
     }
   
-    async function addBook(Title, Author, description, ISBN, publishDate, pageCount, createdAt, NumberOfCopies) {
-      return Book.create({Title: Title, Author: Author,ISBN:ISBN, description: description, publishDate: publishDate,pageCount: pageCount, createdAt: createdAt, NumberOfCopies: NumberOfCopies})
+    async function addBook(Title, Author, description, ISBN, publishDate, pageCount, createdAt, NumberOfCopies,imagePath) {
+      return Book.create({Title: Title, Author: Author,ISBN:ISBN, description: description, publishDate: publishDate,pageCount: pageCount, createdAt: createdAt, NumberOfCopies: NumberOfCopies,imagePath:imagePath})
     }
   
     async function deleteBook(isbn) {
