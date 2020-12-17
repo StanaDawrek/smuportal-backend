@@ -1,7 +1,7 @@
 const Router = require("express").Router;
 const bookService = require("../../services/book.service")();
 const Book = require("../../models/Book");
-
+const storage = require("../../helpers/storage")
 const router = Router({
     mergeParams: true,
   });
@@ -17,7 +17,7 @@ router.get("/getBooks", async(req, res, next) => {
 });
 
 //Route to create a book
-router.post("/addBook", async(req, res, next) => {
+router.post("/addBook",storage, async(req, res, next) => {
     //const book = new Book({
        // Title: req.body.Title,
         //Author: req.body.Author,
@@ -28,8 +28,12 @@ router.post("/addBook", async(req, res, next) => {
      // })
       //saveCover(book, req.body.cover)
     try {
+        const imagePath = 'http://localhost:3000/images/'+ req.body.imagePath.slice(12);
         const {Title, Author, description,ISBN,publishDate,pageCount,createdAt,NumberOfCopies} = req.body;
-        await bookService.addBook(Title, Author, description,ISBN,publishDate, pageCount,createdAt,NumberOfCopies);
+        await bookService.addBook(Title, Author, description,ISBN,publishDate, pageCount,createdAt,NumberOfCopies,imagePath);
+        const book = new Book({
+            Title, Author, description,ISBN,publishDate, pageCount,createdAt,NumberOfCopies,imagePath
+           }) 
         res.send({ success: true, msg: "Book Added"});
     } catch (err) {
         res.send({ success: false, msg: "Book not Added!", err})
