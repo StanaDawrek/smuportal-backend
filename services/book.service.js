@@ -5,6 +5,14 @@ function bookService() {
     async function getBooks() {
       return Book.find({})
     }
+
+    async function getBooksbyISBN(ISBN){
+      return Book.find({ISBN: ISBN})
+    }
+
+    async function getBooksByCategory(category) {
+      return Book.find({category: category})
+     }
   
     async function addBook(Title, Author, description, ISBN, publishDate, pageCount, createdAt, NumberOfCopies,imagePath) {
       return Book.create({Title: Title, Author: Author,ISBN:ISBN, description: description, publishDate: publishDate,pageCount: pageCount, createdAt: createdAt, NumberOfCopies: NumberOfCopies,imagePath:imagePath})
@@ -24,7 +32,9 @@ function bookService() {
     return {
       getBooks,
       addBook,
-      deleteBook
+      deleteBook,
+      getBooksByCategory,
+      getBooksbyISBN
       //saveCover
     }
   }

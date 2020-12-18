@@ -16,6 +16,47 @@ router.get("/getBooks", async(req, res, next) => {
     }
 });
 
+router.get("/getBooksByMathCategory", async(req, res, next) => {
+    try{
+        const category = req.body;
+         const booksByCategory = await bookService.getBooksByCategory("math");
+        res.send(booksByCategory)
+    }
+    catch(err) {
+        res.send({msg: "Failed to get books"})
+    }
+});
+router.get("/getBooksByPhysicsCategory", async(req, res, next) => {
+    try{
+        const category = req.body;
+         const booksByCategory = await bookService.getBooksByCategory("physics");
+        res.send(booksByCategory)
+    }
+    catch(err) {
+        res.send({msg: "Failed to get books"})
+    }
+});
+router.get("/getBooksByenglishCategory", async(req, res, next) => {
+    try{
+        const category = req.body;
+         const booksByCategory = await bookService.getBooksByCategory("english");
+        res.send(booksByCategory)
+    }
+    catch(err) {
+        res.send({msg: "Failed to get books"})
+    }
+});
+router.get("/getBooksbyISBN/:ISBN", async(req, res, next) => {
+    try{
+        const ISBN = req.params.ISBN;
+         const booksByISBN = await bookService.getBooksbyISBN(ISBN);
+        res.send(booksByISBN)
+    }
+    catch(err) {
+        res.send({msg: "Failed to get books"})
+    }
+});
+
 //Route to create a book
 router.post("/addBook",storage, async(req, res, next) => {
     //const book = new Book({
