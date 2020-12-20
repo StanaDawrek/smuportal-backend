@@ -10,11 +10,18 @@ const bookingBookSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: endDay => {
-          return !this.startDay < endDay;
+          return !this.startDay < endDay ;
         },
-        message: endTime => `endTime must be larger than startTime`
-      }
+        message: endTime => `endTime must be larger than startTime `
+      },
+      /*validate: {
+        validator: (endDay,startDay) => {
+          return  endDay-startDay<=3 ;
+        },
+        message: endTime => `the duration must be at maximum 3 days `
+      }*/
     },
+    
     ISBN: {
       type: Number,
       unique: true,

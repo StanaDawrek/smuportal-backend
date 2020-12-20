@@ -26,6 +26,16 @@ router.get("/getBooksByMathCategory", async(req, res, next) => {
         res.send({msg: "Failed to get books"})
     }
 });
+router.get("/getBooksByPsychologyCategory", async(req, res, next) => {
+    try{
+        const category = req.body;
+         const booksByCategory = await bookService.getBooksByCategory("Psychology");
+        res.send(booksByCategory)
+    }
+    catch(err) {
+        res.send({msg: "Failed to get books"})
+    }
+});
 router.get("/getBooksByPhysicsCategory", async(req, res, next) => {
     try{
         const category = req.body;
