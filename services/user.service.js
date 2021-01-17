@@ -27,6 +27,10 @@ function userService() {
     await user.save();
   }
 
+  async function deleteUser(universityID) {
+    return User.deleteOne({universityID: universityID})
+  }
+
   async function register(userInput, role_id) {
     try {
       const hashedPassword = await bcrypt.hash(userInput.password, 10);
@@ -92,6 +96,7 @@ function userService() {
     addUser,
     getUserById,
     getUserByEmail,
+    deleteUser,
     updateUser,
     register,
     login
