@@ -12,9 +12,13 @@ function firmService() {
   async function deleteFirm(universityID) {
     return Firm.deleteOne({universityID: universityID})
   }
+  async function addFirm(Name,Sector,Industry,PublicPrivate,Address,Registration,Email) {
+    return Firm.create({Name: Name, Sector: Sector,Industry:Industry, PublicPrivate: PublicPrivate, Address: Address,Registration: Registration,Email: Email})
+  }
 
   return {
     getFirms,
+    addFirm,
     deleteFirm,
   };
 }
