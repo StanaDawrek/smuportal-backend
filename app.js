@@ -41,8 +41,6 @@ process.on('SIGINT', function() {
   }); 
 }); 
 
-// Fills DB
-require("./models/populate");
 
 //Middleware
 app.use(cors());
