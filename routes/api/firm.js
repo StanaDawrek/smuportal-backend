@@ -11,16 +11,34 @@ router.get("/getFirms", async(req, res, next) => {
         res.send(firms)
     }
     catch(err) {
-        res.send({msg: "Failed to get users"})
+        res.send({msg: "Failed to get firms"})
+    }
+});
+router.get("/getFirmsByPrivateSector", async(req, res, next) => {
+    try{
+        const FirmsBySector = await firmService.getfirmsBySector("private");
+        res.send(FirmsBySector);
+    }
+    catch(err) {
+        res.send({msg: "Failed to get firms"})
+    }
+});
+router.get("/getFirmsByPublicSector", async(req, res, next) => {
+    try{
+        const FirmsBySector = await firmService.getfirmsBySector("public");
+        res.send(FirmsBySector);
+    }
+    catch(err) {
+        res.send({msg: "Failed to get firms"})
     }
 });
 router.delete("/deleteFirm/:registration", async(req, res, next) => {
     try {
-        const registration = req.params.registration;
-        await UserService.deleteUser(registration);
-        res.send({ success: true, msg: "User deleted"})
+        const registration = req.params.Registration;
+        await firmService.deleteFirm(registration);
+        res.send({ success: true, msg: "firm deleted"})
     } catch (error) {
-        res.send({ success: false, msg: "User not Added!"})
+        res.send({ success: false, msg: "firm not deleted!"})
     }
 });
 
