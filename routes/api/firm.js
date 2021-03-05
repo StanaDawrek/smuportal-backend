@@ -1,6 +1,7 @@
 const Router = require("express").Router;
 const firmService = require("../../services/firm.service")();
 const firm = require("../../models/Firm");
+const storage = require("../../helpers/storage")
 const router = Router({
     mergeParams: true,
   });
@@ -41,13 +42,14 @@ router.delete("/deleteFirm/:registration", async(req, res, next) => {
         res.send({ success: false, msg: "firm not deleted!"})
     }
 });
-
-router.post("/addFirm", async(req, res, next) => {
+router.post("/addFirm",storage, async(req, res, next) => {
     try {
         const {Name,Sector,Industry,PublicPrivate,Address,Registration,Email} = req.body;
-        await firmService.addFirm(Name,Sector,Industry,PublicPrivate,Address,Registration,Email);
+        const imagePath = 'http://localhost:3000/images/'+ req.body.imagePath.slice(12);
+        //const imagePath = '';
+        await firmService.addFirm(Name,Sector,Industry,PublicPrivate,Address,Registration,Email,imagePath);
         const firms = new firm({
-            Name,Sector,Industry,PublicPrivate,Address,Registration,Email
+            Name,Sector,Industry,PublicPrivate,Address,Registration,Email,imagePath
            }) 
         res.send({ success: true, msg: "Firm Added"});
     } catch (err) {

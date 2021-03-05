@@ -54,7 +54,8 @@ const firmSchema = new mongoose.Schema({
     lowercase: true,
     min: 6,
     max: 255
-  }
+  },
+  imagePath: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Firm", firmSchema);

@@ -8,7 +8,7 @@ const router = require("./routes/createRouter.js")();
 var bodyParser = require('body-parser');
 var fs = require('fs');
 
-const path = require('path');
+var path = require('path');
 const app = express();
 
 dotenv.config();
@@ -41,6 +41,8 @@ process.on('SIGINT', function() {
   }); 
 }); 
 
+// Fills DB
+require("./models/Firm");
 
 //Middleware
 app.use(cors());
@@ -49,7 +51,8 @@ app.use(express.json());
 app.use(morgan("dev"));
 //Route Middlewares
 app.use("/api/user", router);
-app.use('/images', express.static(path.join('images')));
+app.use(bodyParser.json());
+app.get('/images', express.static(path.join('images')));
 // Temporary error handler
 app.use(function (err, req, res, next) {
   console.error(err.stack);
